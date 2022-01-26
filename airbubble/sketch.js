@@ -8,7 +8,7 @@ Send and Display messages from everyone who is connected
 //within your group, you will use 1 of your accounts for the project
 
 let dataServer;
-let pubKey = "pub-c-0993303c-a820-44a0-aa59-bf7587ec01a5";
+
 let subKey = "sub-c-dae40c04-757c-11ec-87be-4a1e879706fb";
 
 //interface variables
@@ -106,7 +106,6 @@ function setup()
    // initialize pubnub
   dataServer = new PubNub(
   {
-    publish_key   : pubKey,  //get these from the pubnub account online
     subscribe_key : subKey,  
     ssl: true,  //enables a secure connection. This option has to be used if using the OCAD webspace
     uuid: myID
@@ -145,22 +144,7 @@ function draw()
 }
 
 
-///uses built in mouseClicked function to send the data to the pubnub server
-function sendTheMessage() {
- 
-///get the text from the textbox and assign it to the message key
-dataToSend.textMessage=sendText.value();
 
-
-  // Send Data to the server to draw it in all other canvases
-  dataServer.publish(
-    {
-      channel: channelName,
-      message: dataToSend  
-
-    });
-
-}
 
 function readIncoming(inMessage) //when new data comes in it triggers this function, 
 {                               // this works becsuse we subscribed to the channel in setup()
